@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Add Doctors
+{% endblock title %}
+
+{% block content %}
+<div class="display-4 text-center mb-3">Add Doctors</div>
+<div class="my-3">
+    <form action="" method="POST" class="container col-sm-6 my-5 text-center">
+        {% csrf_token %}
+        <label for="dname">Doctor Name</label>
+        <input type="text" name="dname" id="dname" class="form-control text-center" required>
+        <label for="contact">Contact</label>
+        <input type="text" name="contact" id="contact" class="form-control text-center" required>
+        <label for="spcl">Specialization</label>
+        <input type="text" name="special" id="spcl" class="form-control text-center" required>
+        <input type="submit" value="Add" class="btn btn-outline-success my-3">
+    </form>
+</div>
+{% ifequal error 'no' %}
+<script>
+    alert('Record Saved Successfully');
+    window.location=("{% url 'view_doctor' %}");
+</script>
+{% endifequal %}
+{% ifequal error 'yes' %}
+<script>
+    alert('Something went wrong, Try Again');
+</script>
+{% endifequal %}
+
+{% endblock content %}

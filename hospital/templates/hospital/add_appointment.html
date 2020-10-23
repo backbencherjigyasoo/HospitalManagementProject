@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Add Appointment
+{% endblock title %}
+
+{% block content %}
+<div class="display-4 text-center mb-3">Add Appointment</div>
+<div class="my-3">
+    <form action="" method="POST" class="container col-sm-6 my-5 text-center">
+        {% csrf_token %}
+        <label for="dname">Doctor Name</label>
+        <select name="dname" id="dname" class="form-control">
+            {% for d in doctor %}
+            <option value="{{d.name}}">{{d.name}}({{d.special}})</option>
+            {% endfor %}
+        </select>
+        <label for="pname">Patient Name</label>
+        <select name="pname" id="pname" class="form-control">Select
+            {% for p in patient %}
+            <option value="{{p.name}}">{{p.name}}</option>
+            {% endfor %}
+        </select>
+        <label for="date">Date</label>
+        <input type="date" class="form-control" id="date" name="date" required>
+        <label for="time">Time</label>
+        <input type="time" class="form-control" id="time" name="time" required>
+        <input type="submit" value="Add" class="btn btn-outline-success my-3">
+    </form>
+</div>
+{% ifequal error 'no' %}
+<script>
+    alert('Record Saved Successfully');
+    window.location=("{% url 'view_appointment' %}");
+</script>
+{% endifequal %}
+{% ifequal error 'yes' %}
+<script>
+    alert('Something went wrong, Try Again');
+</script>
+{% endifequal %}
+
+{% endblock content %}

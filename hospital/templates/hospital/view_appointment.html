@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+View Appointment
+{% endblock title %}
+
+{% block content %}
+<div class="display-4 text-center mb-3">View Appointment</div>
+<table id="example" class="table table-light">
+    <thead class="thead-light">
+        <tr>
+            <th>Doctor's Name</th>
+            <th>Patient's Name</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for a in appointment %}
+        <tr>
+            <td>{{a.doctor}}({{a.doctor.special}})</td>
+            <td>{{a.patient}}</td>
+            <td>{{a.cr_date}}</td>
+            <td>{{a.cr_time}}</td>
+            <td><a href="{% url 'delete_appointment' a.id %}" onclick="return confirm('Do you really want to delete this record?')" class="btn btn-outline-danger btn-sm">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

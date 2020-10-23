@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+View Patient
+{% endblock title %}
+
+{% block content %}
+<div class="display-4 text-center mb-3">View Patients</div>
+<table id="example" class="table table-light">
+    <thead class="thead-light">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Sex</th>
+            <th>Contact</th>
+            <th>Address</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in patient %}
+        <tr>
+            <td>{{p.id}}</td>
+            <td>{{p.name}}</td>
+            <td>{{p.gender}}</td>
+            <td>{{p.mobile}}</td>
+            <td>{{p.address}}</td>
+            <td><a href="{% url 'delete_patient' p.id %}" onclick="return confirm('Do you really want to delete this record?')" class="btn btn-outline-danger btn-sm">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

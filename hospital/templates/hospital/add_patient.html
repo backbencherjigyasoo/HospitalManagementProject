@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Add Patients
+{% endblock title %}
+
+{% block content %}
+<div class="display-4 text-center mb-3">Add Patients</div>
+<div class="my-3">
+    <form action="" method="POST" class="container col-sm-6 my-5 text-center">
+        {% csrf_token %}
+        <label for="pname">Patient Name</label>
+        <input type="text" name="pname" id="pname" class="form-control text-center" required>
+        
+        <label for="contact">Contact</label>
+        <input type="text" name="contact" id="contact" class="form-control text-center" required>
+        <label for="addr">Address</label>
+        <textarea class="form-control text-center" name="address" id="addr" cols="30" rows="10"></textarea>
+        <label for="gender">Sex</label> <br>
+        <input type="radio" name="gender" value="male">Male
+        <input type="radio" name="gender" value="female">Female <br>
+        <input type="submit" value="Add" class="btn btn-outline-success my-3">
+    </form>
+</div>
+{% ifequal error 'no' %}
+<script>
+    alert('Record Saved Successfully');
+    window.location=("{% url 'view_patient' %}");
+</script>
+{% endifequal %}
+{% ifequal error 'yes' %}
+<script>
+    alert('Something went wrong, Try Again');
+</script>
+{% endifequal %}
+
+{% endblock content %}
